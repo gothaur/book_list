@@ -36,7 +36,13 @@
     <td>{{ book.title }}</td>
     <td>{{ book.author }}</td>
     <td>{{ book.language }}</td>
-    <td>{{ book.published_date }}</td>
+    <td>
+      {% if book.partial_date %}
+        {{ book.published_date|date:"Y" }}
+      {% else %}
+        {{ book.published_date|date:"d-m-Y" }}
+      {% endif %}
+    </td>
     <td>
       <a
         type="button"

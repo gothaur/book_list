@@ -30,6 +30,9 @@ class Book(models.Model):
     page_count = models.IntegerField(
         null=True,
     )
+    partial_date = models.BooleanField(
+        default=False,
+    )
     published_date = models.DateField(
         null=True,
     )

@@ -1,13 +1,7 @@
-from django.db.models import (
-    When,
-)
-from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DetailView,
-    FormView,
     ListView,
-    TemplateView,
     UpdateView,
 )
 
@@ -86,17 +80,6 @@ class BookDetailView(DetailView):
     pk_url_kwarg = 'book_id'
     context_object_name = 'book'
     template_name = 'books/book_detail.html'
-
-
-# class ImportBookView(TemplateView):
-#     template_name = 'books/import_book.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = {
-#             'books': get_book('Snuff', 'Pratchett'),
-#             'form': ImportBookForm,
-#         }
-#         return context
 
 
 class ImportBookView(ListView):

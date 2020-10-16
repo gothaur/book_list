@@ -10,6 +10,8 @@ from books.models import (
 
 class BookForm(forms.ModelForm):
 
+    modified = False
+
     title = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -18,7 +20,6 @@ class BookForm(forms.ModelForm):
             }
         ),
         label='',
-        required=False,
     )
 
     author = forms.CharField(
@@ -65,6 +66,7 @@ class BookForm(forms.ModelForm):
             }
         ),
     )
+
     published_date = forms.CharField(
         label='Data publikacji',
         required=False,
@@ -74,6 +76,12 @@ class BookForm(forms.ModelForm):
                 'placeholder': 'Data w formacie YYYY-MM-DD lub YYYY',
             }
         )
+    )
+
+    partial_date = forms.BooleanField(
+        widget=forms.HiddenInput(),
+        initial=False,
+        required=False,
     )
 
     language = forms.CharField(
@@ -90,6 +98,18 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = '__all__'
+
+    def clean_published_date(self):
+        fixed_date = self.cleaned_data['published_date']
+        if len(fixed_date) <= 5:
+            fixed_date = f"{fixed_date[:4]}-01-01"
+            self.modified = True
+        return fixed_date
+
+    def clean(self):
+        cd = super().clean()
+        if self.modified:
+            cd['partial_date'] = True
 
 
 class SearchBookForm(forms.Form):
@@ -148,10 +168,73 @@ class SearchBookForm(forms.Form):
 
 class ImportBookForm(forms.Form):
 
-    title = forms.CharField(max_length=256, required=False)
-    author = forms.CharField(max_length=256, required=False)
-    publisher = forms.CharField(max_length=256, required=False)
-    subject = forms.CharField(max_length=1024, required=False)
-    isbn = forms.CharField(max_length=17, required=False)
-    lccn = forms.CharField(max_length=32, required=False)
-    oclc = forms.CharField(max_length=32, required=False)
+    title = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control mb-3',
+                'placeholder': 'Tytuł',
+            }
+        ),
+    )
+    author = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Autor',
+            }
+        ),
+    )
+    publisher = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Wydawca',
+            }
+        ),
+    )
+    subject = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Temat',
+            }
+        ),
+    )
+    isbn = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Numer ISBN',
+            }
+        ),
+    )
+    lccn = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Numer LCCN',
+            }
+        ),
+    )
+    oclc = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Numer OCLC',
+            }
+        ),
+    )

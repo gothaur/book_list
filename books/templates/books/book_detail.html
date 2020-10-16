@@ -3,13 +3,22 @@
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
     <div class="col-md-4">
-      <img src="{{ book.image_link }}" class="card-img" alt="...">
+      <img src="{{ book.image_link }}" class="card-img" alt="Brak okładki">
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">Tytuł: {{ book.title }}</h5>
         <p class="card-text"> <small class="text-muted">Autor: {{ book.author }}</small></p>
-        <p class="card-text"><small class="text-muted">Data publikacji: {{ book.published_date }}</small></p>
+        <p class="card-text">
+          <small class="text-muted">
+            Data publikacji:
+            {% if book.partial_date %}
+              {{ book.published_date|date:"Y" }}
+            {% else %}
+              {{ book.published_date|date:"d-m-Y" }}
+            {% endif %}
+          </small>
+        </p>
         <p class="card-text"><small class="text-muted">Liczba stron: {{ book.page_count }}</small></p>
         <p class="card-text"><small class="text-muted">Język publikacji: {{ book.language }}</small></p>
         <p class="card-text"><small class="text-muted">ISBN: {{ book.isbn_number }}</small></p>
