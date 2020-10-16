@@ -40,13 +40,6 @@
     <td>
       <img src="{{ book.imageLinks }}" alt="Brak okładki">
     </td>
-<!--    <td>-->
-<!--      {% for isbn in book.industryIdentifiers %}-->
-<!--        {% if isbn.type == 'ISBN_13' %}-->
-<!--          {{isbn.identifier}}-->
-<!--        {% endif %}-->
-<!--      {% endfor %}-->
-<!--    </td>-->
     <td>{{ book.industryIdentifiers }}</td>
     <td>
       <form method="post" action="{% url 'books:add-book' %} ">
@@ -60,7 +53,7 @@
         <input
           type="hidden"
           name="isbn_number"
-          value="{{ book.language }}"
+          value="{{ book.industryIdentifiers }}"
         >
         <button type="submit" class="btn btn-link btn-sm">+</button>
       </form>

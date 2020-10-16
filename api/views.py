@@ -19,13 +19,7 @@ from books.models import (
 
 class BookAPIView(ListAPIView):
 
-    # filter_fields = (
-    #     'title',
-    #     'author',
-    #     'language',
-    # )
     filterset_class = BookFilter
-
     permission_classes = [
         AllowAny,
     ]
