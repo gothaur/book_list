@@ -214,7 +214,6 @@ env/*
 venv/*
 .idea/*
 
-migrations/
 
 
 # End of https://www.gitignore.io/api/python,pycharm
