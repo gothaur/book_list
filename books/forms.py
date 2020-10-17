@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import (
     URLValidator
 )
+import re
 
 from books.models import (
     Book,
@@ -269,3 +270,24 @@ class ImportBookForm(forms.Form):
             }
         ),
     )
+
+    def clean_isbn(self):
+        isbn = self.cleaned_data['isbn']
+
+        if len(isbn) == 0 or len(isbn) == 13 or len(isbn) == 10:
+            return isbn
+        else:
+            msg = "Numer ISBN zawiera 13 lub 10 cyfr"
+            self.add_error('isbn_number', msg)
+
+    def clean_oclc(self):
+        oclc = self.cleaned_data['oclc']
+
+        if re.match(r'^ocm\d{8}$', oclc) \
+                or re.match(r'^ocn\d{9}$', oclc) \
+                or re.match(r'^on\d{10,}$', oclc) \
+                or len(oclc) < 1:
+            return oclc
+
+        msg = "Niepoprawny numer OCLC"
+        self.add_error('oclc', msg)
