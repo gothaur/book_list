@@ -165,6 +165,16 @@ class SearchBookForm(forms.Form):
         required=False,
     )
 
+    def clean(self):
+        cleaned_data = super().clean()
+        date__gte = cleaned_data.get("date_from")
+        date__lte = cleaned_data.get("date_to")
+
+        if date__gte and date__lte and date__lte < date__gte:
+            msg = "Data 'od' nie może być większa od daty 'do'"
+            self.add_error('date_from', msg)
+            self.add_error('date_to', msg)
+
 
 class ImportBookForm(forms.Form):
 

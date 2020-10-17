@@ -23,20 +23,13 @@ from books.services import (
 class BookListView(ListView):
 
     context_object_name = 'books'
+    http_method_names = ['get', 'post']
     queryset = Book.objects.all()
     template_name = 'books/book_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = SearchBookForm(
-            initial={
-                'title': self.request.GET.get('title', ''),
-                'author': self.request.GET.get('author', ''),
-                'language': self.request.GET.get('language', ''),
-                'date_from': self.request.GET.get('date_from', ''),
-                'date_to': self.request.GET.get('date_to', ''),
-            }
-        )
+        context['form'] = SearchBookForm(self.request.GET)
 
         return context
 
