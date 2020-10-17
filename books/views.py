@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.urls import (
     reverse_lazy
 )
@@ -63,44 +64,40 @@ class AddBookView(CreateView):
     template_name = 'books/add_book.html'
     form_class = AddBookForm
 
-    # def form_valid(self, form):
-    #
-    #     author = form.cleaned_data.get('author', '')
-    #     image_link = form.cleaned_data.get('image_link', '')
-    #     title = form.cleaned_data.get('title', '')
-    #     isbn_number = form.cleaned_data.get('isbn_number', '')
-    #     language = form.cleaned_data.get('language', '')
-    #     partial_date = form.cleaned_data.get('partial_date', '')
-    #     page_count = form.cleaned_data.get('page_count', '')
-    #     published_date = form.cleaned_data.get('published_date', '')
-    #
-    #     try:
-    #         print('jestem w traju')
-    #         obj = Book.objects.get(
-    #             author__iexact=author,
-    #             image_link=image_link,
-    #             title__iexact=title,
-    #             isbn_number=isbn_number,
-    #             language=language,
-    #             page_count=page_count,
-    #         )
-    #         if obj.exists():
-    #             print()
-    #             return reverse_lazy('books:book-list')
-    #     except Book.DoesNotExist:
-    #         print('weszlem do eksepta')
-    #         Book.objects.create(
-    #             author=author,
-    #             image_link=image_link,
-    #             title=title,
-    #             isbn_number=isbn_number,
-    #             language=language,
-    #             page_count=page_count,
-    #             partial_date=partial_date,
-    #             published_date=published_date,
-    #         )
-    #
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+
+        author = form.cleaned_data.get('author', '')
+        image_link = form.cleaned_data.get('image_link', '')
+        title = form.cleaned_data.get('title', '')
+        isbn_number = form.cleaned_data.get('isbn_number', '')
+        language = form.cleaned_data.get('language', '')
+        partial_date = form.cleaned_data.get('partial_date', '')
+        page_count = form.cleaned_data.get('page_count', '')
+        published_date = form.cleaned_data.get('published_date', '')
+
+        try:
+            Book.objects.get(
+                author__iexact=author,
+                image_link=image_link,
+                title__iexact=title,
+                isbn_number=isbn_number,
+                language=language,
+                page_count=page_count,
+            )
+
+        except Book.DoesNotExist:
+            Book.objects.create(
+                author=author,
+                image_link=image_link,
+                title=title,
+                isbn_number=isbn_number,
+                language=language,
+                page_count=page_count,
+                partial_date=partial_date,
+                published_date=published_date,
+            )
+
+        return HttpResponseRedirect(reverse_lazy('books:book-list'))
 
 
 class UpdateBookView(UpdateView):
