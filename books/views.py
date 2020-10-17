@@ -27,7 +27,6 @@ from books.services import (
 class BookListView(ListView):
 
     context_object_name = 'books'
-    http_method_names = ['get', 'post']
     queryset = Book.objects.all()
     template_name = 'books/book_list.html'
 

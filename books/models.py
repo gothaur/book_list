@@ -26,8 +26,9 @@ class Book(models.Model):
         null=True,
     )
     language = models.CharField(
+        blank=True,
+        null=True,
         max_length=8,
-        null=True
     )
     page_count = models.IntegerField(
         null=True,
@@ -42,3 +43,6 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         return reverse('books:book-detail', kwargs={'book_id': self.pk})
+
+    def __str__(self):
+        return self.title

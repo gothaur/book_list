@@ -278,7 +278,7 @@ class ImportBookForm(forms.Form):
             return isbn
         else:
             msg = "Numer ISBN zawiera 13 lub 10 cyfr"
-            self.add_error('isbn_number', msg)
+            self.add_error('isbn', msg)
 
     def clean_oclc(self):
         oclc = self.cleaned_data['oclc']

@@ -1,8 +1,7 @@
 import requests
 
 
-def get_book(title='', author='', publisher='', subject='', isbn='', lccn='', oclc=''):
-
+def url_query_string(title='', author='', publisher='', subject='', isbn='', lccn='', oclc=''):
     path_part = {
         'intitle:': title,
         'inauthor:': author,
@@ -19,6 +18,12 @@ def get_book(title='', author='', publisher='', subject='', isbn='', lccn='', oc
         if value != '':
             query_string += f'{key}{value}+'
     url += query_string.rstrip('+')
+    return url
+
+
+def get_book(title='', author='', publisher='', subject='', isbn='', lccn='', oclc=''):
+
+    url = url_query_string(title, author, publisher, subject, isbn, lccn, oclc)
 
     r = requests.get(url)
     books = r.json()
