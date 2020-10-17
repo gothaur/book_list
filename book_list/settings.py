@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from decouple import(
+from decouple import (
     config,
 )
 import os
@@ -28,7 +28,10 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lista-ksiazek.herokuapp.com']
+ALLOWED_HOSTS = [
+    'lista-ksiazek.herokuapp.com',
+    '127.0.0.1',
+]
 
 
 # Application definition

@@ -3,7 +3,7 @@ import requests
 
 def get_book(title='', author='', publisher='', subject='', isbn='', lccn='', oclc=''):
 
-    url = f'https://www.googleapis.com/books/v1/volumes?q='
+    url = 'https://www.googleapis.com/books/v1/volumes?q='
     if title:
         url += f'intitle:{title}+'
     if author:
