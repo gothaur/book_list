@@ -15,7 +15,9 @@ class Book(models.Model):
         max_length=256,
         null=True,
     )
-    image_link = models.URLField(null=True)
+    image_link = models.URLField(
+        null=True,
+    )
     title = models.CharField(
         max_length=256,
     )

@@ -100,6 +100,22 @@ class AddBookForm(forms.ModelForm):
         model = Book
         fields = '__all__'
 
+    def clean_image_link(self):
+        fixed_url = self.cleaned_data['image_link']
+        if fixed_url == '':
+            fixed_url = 'https://www.midi24.pl/skorki/v2018/brak-okladki.svg'
+
+        return fixed_url
+
+    def clean_isbn_number(self):
+        isbn = self.cleaned_data['isbn_number']
+
+        if len(isbn) == 0 or len(isbn) == 13 or len(isbn) == 10:
+            return isbn
+        else:
+            msg = "Numer ISBN zawiera 13 lub 10 cyfr"
+            self.add_error('isbn_number', msg)
+
     def clean_published_date(self):
         fixed_date = self.cleaned_data['published_date']
         if 3 < len(fixed_date) <= 5:
