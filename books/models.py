@@ -35,6 +35,7 @@ class Book(models.Model):
     )
     published_date = models.DateField(
         null=True,
+        blank=True,
     )
 
     def get_absolute_url(self):

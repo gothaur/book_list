@@ -8,7 +8,7 @@ from books.models import (
 )
 
 
-class BookForm(forms.ModelForm):
+class AddBookForm(forms.ModelForm):
 
     modified = False
 
@@ -69,13 +69,14 @@ class BookForm(forms.ModelForm):
 
     published_date = forms.CharField(
         label='Data publikacji',
+        initial=None,
         required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
                 'placeholder': 'Data w formacie YYYY-MM-DD lub YYYY',
             }
-        )
+        ),
     )
 
     partial_date = forms.BooleanField(
@@ -101,9 +102,13 @@ class BookForm(forms.ModelForm):
 
     def clean_published_date(self):
         fixed_date = self.cleaned_data['published_date']
-        if len(fixed_date) <= 5:
+        if 3 < len(fixed_date) <= 5:
             fixed_date = f"{fixed_date[:4]}-01-01"
             self.modified = True
+
+        if fixed_date == '':
+            fixed_date = None
+
         return fixed_date
 
     def clean(self):
