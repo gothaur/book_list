@@ -3,21 +3,22 @@ import requests
 
 def get_book(title='', author='', publisher='', subject='', isbn='', lccn='', oclc=''):
 
+    path_part = {
+        'intitle:': title,
+        'inauthor:': author,
+        'inpublisher:': publisher,
+        'subject:': subject,
+        'isbn:': isbn,
+        'lccn:': lccn,
+        'oclc:': oclc,
+    }
     url = 'https://www.googleapis.com/books/v1/volumes?q='
-    if title:
-        url += f'intitle:{title}+'
-    if author:
-        url += f'inauthor:{author}+'
-    if publisher:
-        url += f'inpublisher:{publisher}+'
-    if subject:
-        url += f'subject:{subject}+'
-    if isbn:
-        url += f'isbn:{isbn}+'
-    if lccn:
-        url += f'lccn:{lccn}+'
-    if oclc:
-        url += f'oclc:{oclc}+'
+    query_string = ''
+
+    for key, value in path_part.items():
+        if value != '':
+            query_string += f'{key}{value}+'
+    url += query_string.rstrip('+')
 
     r = requests.get(url)
     books = r.json()
