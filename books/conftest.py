@@ -38,7 +38,6 @@ def books():
         language='pl',
         isbn_number='2463452753',
     )
-    print(b)
     Book.objects.create(
         title='Złodziej czasu',
         author='Terry Pratchett',
@@ -46,7 +45,8 @@ def books():
         language='en',
         isbn_number='9788374695763',
         page_count=318,
-        image_link='http://books.google.com/books/content?id=2LjcIAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'
+        image_link='http://books.google.com/books/'
+                   'content?id=2LjcIAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api'
     )
 
     return Book.objects.all()
