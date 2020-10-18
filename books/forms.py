@@ -215,7 +215,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control mb-3',
                 'placeholder': 'Autor',
             }
         ),
@@ -225,7 +225,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control mb-3',
                 'placeholder': 'Wydawca',
             }
         ),
@@ -235,7 +235,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control mb-3',
                 'placeholder': 'Temat',
             }
         ),
@@ -245,7 +245,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control mb-3',
                 'placeholder': 'Numer ISBN',
             }
         ),
@@ -255,7 +255,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control mb-3',
                 'placeholder': 'Numer LCCN',
             }
         ),
@@ -265,7 +265,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control mb-3',
                 'placeholder': 'Numer OCLC',
             }
         ),
