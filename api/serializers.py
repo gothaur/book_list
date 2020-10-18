@@ -3,12 +3,26 @@ from rest_framework import (
 )
 
 from books.models import (
-    Book
+    Author,
+    Book,
 )
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Author
+        fields = '__all__'
 
 
 class BookSerializer(serializers.ModelSerializer):
 
+    author = AuthorSerializer(
+        many=True,
+        read_only=True,
+    )
+
     class Meta:
         model = Book
         fields = '__all__'
+
