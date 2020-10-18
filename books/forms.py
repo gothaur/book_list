@@ -16,7 +16,7 @@ class AddBookForm(forms.ModelForm):
     title = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Tytuł',
             }
         ),
@@ -26,7 +26,7 @@ class AddBookForm(forms.ModelForm):
     author = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Autor',
             }
         ),
@@ -37,7 +37,7 @@ class AddBookForm(forms.ModelForm):
     isbn_number = forms.CharField(
         widget=forms.NumberInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Numer ISBN',
             }
         ),
@@ -48,7 +48,7 @@ class AddBookForm(forms.ModelForm):
     page_count = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Liczba stron',
             }
         ),
@@ -62,7 +62,7 @@ class AddBookForm(forms.ModelForm):
         validators=[URLValidator],
         widget=forms.URLInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Link do okładki',
             }
         ),
@@ -74,7 +74,7 @@ class AddBookForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Data publikacji w formacie YYYY-MM-DD lub YYYY',
             }
         ),
@@ -90,7 +90,7 @@ class AddBookForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control form-control-sm',
                 'placeholder': 'Język publikacji',
             }
         ),
@@ -139,7 +139,7 @@ class SearchBookForm(forms.Form):
     title = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Tytuł',
             }
         ),
@@ -149,7 +149,7 @@ class SearchBookForm(forms.Form):
     author = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Autor',
             }
         ),
@@ -159,7 +159,7 @@ class SearchBookForm(forms.Form):
     language = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Język publikacji',
             }
         ),
@@ -170,7 +170,7 @@ class SearchBookForm(forms.Form):
         label='Data publikacji od',
         widget=forms.DateInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'type': 'date',
             }
         ),
@@ -180,7 +180,7 @@ class SearchBookForm(forms.Form):
         label='Data publikacji do',
         widget=forms.DateInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'type': 'date',
             }
         ),
@@ -205,7 +205,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 for form-control-sm',
                 'placeholder': 'Tytuł',
             }
         ),
@@ -215,7 +215,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Autor',
             }
         ),
@@ -225,7 +225,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Wydawca',
             }
         ),
@@ -235,7 +235,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Temat',
             }
         ),
@@ -245,7 +245,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Numer ISBN',
             }
         ),
@@ -255,7 +255,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Numer LCCN',
             }
         ),
@@ -265,7 +265,7 @@ class ImportBookForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control mb-3',
+                'class': 'form-control mb-3 form-control-sm',
                 'placeholder': 'Numer OCLC',
             }
         ),
