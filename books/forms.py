@@ -69,13 +69,13 @@ class AddBookForm(forms.ModelForm):
     )
 
     published_date = forms.CharField(
-        label='Data publikacji',
+        label='',
         initial=None,
         required=False,
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'placeholder': 'Data w formacie YYYY-MM-DD lub YYYY',
+                'placeholder': 'Data publikacji w formacie YYYY-MM-DD lub YYYY',
             }
         ),
     )

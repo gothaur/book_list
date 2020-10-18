@@ -1,66 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-<form class="mb-3">
-  <div class="form-row">
-  {{ form }}
-<!--  <div class="form-group row">-->
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary mb-3">Wyszukaj</button>
-      <a href="{% url 'books:import-book' %}" class="btn btn-primary mb-3">Wyczyść</a>
+
+  <div class="card mb-3 col-md-8" style="margin: auto">
+    <div class="row no-gutters">
+      <div class="card-body">
+        <h5 class="card-title">Wyszukaj ksiązke do importowania</h5>
+        <form>
+          {{ form }}
+          <div class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">Wyszukaj</button>
+              <a href="{% url 'books:import-book' %}" class="btn btn-secondary">Wyczyść</a>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</form>
 
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Tytuł</th>
-    <th scope="col">Autor</th>
-    <th scope="col">Język</th>
-    <th scope="col">Liczba stron</th>
-    <th scope="col">Data publikacji</th>
-    <th scope="col">Link do okładki</th>
-    <th scope="col">ISBN</th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for book in books %}
-  <tr>
-    <th scope="row">{{ forloop.counter }}</th>
-    <td>{{ book.title }}</td>
-    <td>
-      {% for author in book.authors %}
-      {{ author }},
+  {% if books %}
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tytuł</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Język</th>
+        <th scope="col">Liczba stron</th>
+        <th scope="col">Data publikacji</th>
+        <th scope="col">Link do okładki</th>
+        <th scope="col">ISBN</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for book in books %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ book.title }}</td>
+        <td>
+          {% for author in book.authors %}
+          {{ author }},
+          {% endfor %}
+        </td>
+        <td>{{ book.language }}</td>
+        <td>{{ book.pageCount }}</td>
+        <td>{{ book.publishedDate }}</td>
+        <td>
+          <img src="{{ book.imageLinks }}" alt="Brak okładki">
+        </td>
+        <td>{{ book.industryIdentifiers }}</td>
+        <td>
+          <form method="post" action="{% url 'books:add-book' %} ">
+            {% csrf_token %}
+            <input type="hidden" name="title" value="{{ book.title }}">
+            <input type="hidden" name="author" value="{{ book.authors }}">
+            <input type="hidden" name="published_date" value="{{ book.publishedDate }}">
+            <input type="hidden" name="page_count" value="{{ book.pageCount }}">
+            <input type="hidden" name="image_link" value="{{ book.imageLinks }}">
+            <input type="hidden" name="language" value="{{ book.language }}">
+            <input
+              type="hidden"
+              name="isbn_number"
+              value="{{ book.industryIdentifiers }}"
+            >
+            <button type="submit" class="btn btn-link btn-sm">
+              <img src="https://img.icons8.com/ios-filled/32/000000/add-book.png" alt="add"/>
+            </button>
+          </form>
+        </td>
+      </tr>
       {% endfor %}
-    </td>
-    <td>{{ book.language }}</td>
-    <td>{{ book.pageCount }}</td>
-    <td>{{ book.publishedDate }}</td>
-    <td>
-      <img src="{{ book.imageLinks }}" alt="Brak okładki">
-    </td>
-    <td>{{ book.industryIdentifiers }}</td>
-    <td>
-      <form method="post" action="{% url 'books:add-book' %} ">
-        {% csrf_token %}
-        <input type="hidden" name="title" value="{{ book.title }}">
-        <input type="hidden" name="author" value="{{ book.authors }}">
-        <input type="hidden" name="published_date" value="{{ book.publishedDate }}">
-        <input type="hidden" name="page_count" value="{{ book.pageCount }}">
-        <input type="hidden" name="image_link" value="{{ book.imageLinks }}">
-        <input type="hidden" name="language" value="{{ book.language }}">
-        <input
-          type="hidden"
-          name="isbn_number"
-          value="{{ book.industryIdentifiers }}"
-        >
-        <button type="submit" class="btn btn-link btn-sm">+</button>
-      </form>
-    </td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  {% endif %}
 {% endblock %}

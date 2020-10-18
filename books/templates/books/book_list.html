@@ -1,65 +1,69 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card mb-3" style="max-width: 540px;">
+
+<div class="card mb-3 col-md-8" style="margin: auto">
   <div class="row no-gutters">
-    <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">Formularz wyszukiwania</h5>
         <form>
           {{ form }}
           <div class="form-group row">
             <div class="col-sm-10">
-              <button type="submit" class="btn btn-primary mb-3">Wyszukaj</button>
-              <a href="{% url 'books:book-list' %}" class="btn btn-primary mb-3">Wyczyść</a>
+              <button type="submit" class="btn btn-primary">Wyszukaj</button>
+              <a href="{% url 'books:book-list' %}" class="btn btn-secondary">Wyczyść</a>
             </div>
           </div>
         </form>
       </div>
-    </div>
   </div>
 </div>
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Tytuł</th>
-    <th scope="col">Autor</th>
-    <th scope="col">Język</th>
-    <th scope="col">Data publikacji</th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for book in books %}
-  <tr>
-    <th scope="row">{{ forloop.counter }}</th>
-    <td>{{ book.title }}</td>
-    <td>
-      {% for author in book.author.all %}
-        {{ author }}<br>
+
+  {% if books %}
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tytuł</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Język</th>
+        <th scope="col">Data publikacji</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      {% for book in books %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ book.title }}</td>
+        <td>
+          {% for author in book.author.all %}
+            {{ author }}<br>
+          {% endfor %}
+        </td>
+        <td>{{ book.language }}</td>
+        <td>
+          {% if book.partial_date %}
+            {{ book.published_date|date:"Y" }}
+          {% else %}
+            {{ book.published_date|date:"d-m-Y" }}
+          {% endif %}
+        </td>
+        <td>
+          <a
+            type="button"
+            href="{% url 'books:book-edit' book.id %}"
+          >
+            <button class="btn btn-link btn-sm">
+              <img src="https://img.icons8.com/material-sharp/16/000000/edit.png" alt="edit">
+            </button>
+          </a>
+        </td>
+      </tr>
       {% endfor %}
-    </td>
-    <td>{{ book.language }}</td>
-    <td>
-      {% if book.partial_date %}
-        {{ book.published_date|date:"Y" }}
-      {% else %}
-        {{ book.published_date|date:"d-m-Y" }}
-      {% endif %}
-    </td>
-    <td>
-      <a
-        type="button"
-        href="{% url 'books:book-edit' book.id %}"
-      >
-        <button class="btn btn-link btn-sm">
-          <img src="https://img.icons8.com/material-sharp/16/000000/edit.png" alt="edit">
-        </button>
-      </a>
-    </td>
-  </tr>
-  {% endfor %}
-  </tbody>
-</table>
+      </tbody>
+    </table>
+    {% else %}
+    <h2 style="text-align: center">Nie masz jeszcze żadnych książek</h2>
+  {% endif %}
 
 {% endblock %}

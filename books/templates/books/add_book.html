@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn btn-primary" value="Dodaj"/>
-</form>
+
+<div class="card mb-3 col-md-8" style="margin: auto">
+  <div class="row no-gutters">
+      <div class="card-body">
+        <h5 class="card-title">Formularz wyszukiwania</h5>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" class="btn btn-primary" value="Dodaj"/>
+        </form>
+      </div>
+  </div>
+</div>
 {% endblock %}
