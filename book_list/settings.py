@@ -36,6 +36,7 @@ ALLOWED_HOSTS = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3001",
     "http://127.0.0.1:3001",
+    "https://react-lista-ksiazek.herokuapp.com",
 ]
 
 
