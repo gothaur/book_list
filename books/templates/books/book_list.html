@@ -62,8 +62,10 @@
       {% endfor %}
       </tbody>
     </table>
+    {% elif 'title' in request.GET%}
+      <h3 class="mb-3" style="text-align: center">Nic nie znaleziono</h3>
     {% else %}
-    <h2 style="text-align: center">Nie masz jeszcze żadnych książek</h2>
+    <h3 style="text-align: center">Nie masz jeszcze żadnych książek</h3>
   {% endif %}
 
 {% endblock %}
