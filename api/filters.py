@@ -6,8 +6,8 @@ from books.models import (
 
 
 class BookFilter(django_filters.FilterSet):
-    title = django_filters.CharFilter(lookup_expr='iexact')
-    author = django_filters.CharFilter(lookup_expr='iexact')
+    title = django_filters.CharFilter(lookup_expr='icontains')
+    author = django_filters.CharFilter(lookup_expr='name__icontains')
     language = django_filters.CharFilter(lookup_expr='iexact')
     published_date__gt = django_filters.DateFilter(
         field_name='published_date', lookup_expr='gt'
