@@ -15,8 +15,7 @@ from books.models import (
 @pytest.mark.django_db
 def test_book_model(book):
     assert Book.objects.get(
-        title='Eryk',
-        author='Terry Pratchett'
+        title='Eryk'
     ) == book
     assert len(Book.objects.all()) == 1
 

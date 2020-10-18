@@ -9,11 +9,13 @@ class Author(models.Model):
         max_length=256,
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Book(models.Model):
-    author = models.CharField(
-        max_length=256,
-        null=True,
+    author = models.ManyToManyField(
+        Author,
     )
     image_link = models.URLField(
         null=True,
