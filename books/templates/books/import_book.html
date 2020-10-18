@@ -46,8 +46,12 @@
         <td>{{ book.language }}</td>
         <td>{{ book.pageCount }}</td>
         <td>{{ book.publishedDate }}</td>
-        <td>
-          <img src="{{ book.imageLinks }}" alt="Brak okładki">
+        <td style="margin: auto">
+          {% if book.imageLinks %}
+            <img src="{{ book.imageLinks }}" alt="Brak okładki">
+            {% else %}
+            <img src="https://img.icons8.com/pastel-glyph/64/000000/image--v1.png"/>
+          {% endif %}
         </td>
         <td>{{ book.industryIdentifiers }}</td>
         <td>
