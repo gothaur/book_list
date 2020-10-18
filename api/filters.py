@@ -21,6 +21,5 @@ class BookFilter(django_filters.FilterSet):
         fields = [
             'author',
             'language',
-            'published_date',
             'title',
         ]
