@@ -21,3 +21,24 @@ Przykład wyszukiwania książki Eryk Terry'ego Pratchetta:
 ```
 GET https://lista-ksiazek.herokuapp.com/api/books/?title=eryk&author=Pratchett
 ```
+### Odpowiedź
+```
+[
+    {
+        "id":6,
+        "author":[
+            {
+                "id":1,
+                "name":"Terry Pratchett"
+            }
+        ],
+        "image_link":"http://books.google.com/books/content?id=4i--PwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+        "title":"Eryk",
+        "isbn_number":"9788376480312"
+        ,"language":"en",
+        "page_count":113,
+        "partial_date":true,
+        "published_date":"2009-01-01"
+    }
+]
+```
