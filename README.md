@@ -15,3 +15,9 @@ to zapytanie wymaga conajmniej jednego z parametrów:
 * laguage= zwraca wyniki, w których wpisany tekst znajduje się w języku publikacji
 * date_from= zwraca wyniki, w których data publikacji jest większa od wpisanej
 * date_to= zwraca wyniki, w których data publikacji jest mniejsza od wpisanej
+
+## Zapytanie
+Przykład wyszukiwania książki Eryk Terry'ego Pratchetta:
+```
+GET https://lista-ksiazek.herokuapp.com/api/books/?title=eryk&author=Pratchett
+```
